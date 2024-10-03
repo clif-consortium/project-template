@@ -40,8 +40,8 @@ project-template/
 - **`utils/` Directory**: Utility functions and modules used throughout the project. Some common utility functions for CLIF projects are provided.
 
 ## Example Repositories
-* [CLIF Adult Sepsis Events](https://github.com/08wparker/CLIF_adult_sepsis_events)
-* [CLIF Eligibility for mobilization](https://github.com/kaveriC/mobilization)
+* [CLIF Adult Sepsis Events](https://github.com/08wparker/CLIF_adult_sepsis_events) for R
+* [CLIF Eligibility for mobilization](https://github.com/kaveriC/mobilization) for Python
 ---
 
 
