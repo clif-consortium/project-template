@@ -1,6 +1,18 @@
-# CLIF Project Template
+# CLIF Project Title
 
-This repository provides a recommended structure for CLIF project repositories. The proposed layout promotes consistency, facilitates collaboration, and ensures that all essential components are included in each project. While this structure serves as a guideline, Principal Investigators (PIs) have the flexibility to modify it or add additional directories as needed to suit their project's specific requirements.
+## Objective
+
+Describe the project objective
+
+## Required CLIF tables and fields
+
+Please refer to the online [CLIF data dictionary](https://clif-consortium.github.io/website/data-dictionary.html), [ETL tools](https://github.com/clif-consortium/CLIF/tree/main/etl-to-clif-resources), and [specific table contacts](https://github.com/clif-consortium/CLIF?tab=readme-ov-file#relational-clif) for more information on constructing the required tables and fields. List all required tables for the project here, and provide a brief rationale for why they are required.
+
+## Cohort identification
+Describe study cohort inclusion and exclusion criteria here
+
+## Project Environment
+Describe the steps to setup the project environment and other configurations
 
 ## Repository Structure
 
@@ -29,20 +41,4 @@ project-template/
 
 ---
 
-# CLIF Project Title
 
-## Objective
-
-Describe the project objective
-
-## Required CLIF tables and fields
-
-Please refer to the online CLIF data dictionary, ETL tools, and specific table contacts for more information on constructing the required tables and fields.
-List all required tables for the project here, and provide a brief rationale for why they are required.
-For more advanced tables, indicate if the entire table is required, only specific fields, or only a filtered version.
-
-## Cohort identification
-Describe study cohort inclusion and exclusion criteria here
-
-## Project Environment
-Describe the steps to setup the project environment and other configurations
