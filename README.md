@@ -39,6 +39,9 @@ project-template/
 - **`code/` Directory**: Contains code as R/Python scripts or .Rmd/.qmd/jupyter notebooks.  The code is broadly related to data quality checks, cohort identification processes and data analysis tasks
 - **`utils/` Directory**: Utility functions and modules used throughout the project. Some common utility functions for CLIF projects are provided.
 
+## Example Repositories
+* [CLIF Adult Sepsis Events](https://github.com/08wparker/CLIF_adult_sepsis_events)
+* [CLIF Eligibility for mobilization](https://github.com/kaveriC/mobilization)
 ---
 
 
