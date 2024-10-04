@@ -39,4 +39,4 @@ Use this directory to store intermediate or final results.
 
           # Save the GTTable object to a PDF file (gtsave equivalent)
           table_gt.to_pdf(output_file)
-```
+          ```
