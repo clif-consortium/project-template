@@ -1,7 +1,6 @@
  ## Code directory
 
-This directory contains scripts for the project workflow. The general workflow consists of three main steps: cohort identification, quality control, and analysis. Scripts can be implemented in R or Python, depending on project requirements. 
-Please note that this workflow is just a suggestion, and you may change the structure to suit your project needs.
+This directory contains scripts for the project workflow. The general workflow consists of three main steps: cohort identification, quality control, and analysis. Scripts can be implemented in R or Python, depending on project requirements. Please note that this workflow is just a suggestion, and you may change the structure to suit your project needs.
 
 ### General Workflow
 
@@ -26,18 +25,16 @@ Please note that this workflow is just a suggestion, and you may change the stru
    - Handle outliers using predefined thresholds as given in `outlier-thresholds` directory. 
    - Clean and preprocess the data for analysis
 
+   Script: [`code/templates/R/02_quality_checks_template.R`](code/templates/R/02_quality_checks_template.R) & [`code/templates/R/03_outlier_handling_template.R`](code/templates/R/03_outlier_handling_template.R)
    Input: cohort_data
    Output: cleaned_cohort_data
 
 3. Run the analysis script(s)
    This script (or set of scripts) should contain the main analysis code for the project.
    It may be broken down into multiple scripts if necessary.
-
+   
+   Script: [`code/templates/R/04_analysis_template.R`](code/templates/R/04_analysis_template.R)
    Input: cleaned_cohort_data
-   Output: [List of expected result files, e.g., statistical_results, figures, tables saved in the `results` directory]
+   Output: [List of expected result files, e.g., statistical_results, figures, tables saved in the `output/final` directory]
 
-### Notes
-- Ensure that the input and output file names are consistent across scripts
-- Document any specific dependencies or environment setup required for each script
-- Consider version control for your code and data to track changes over time
 

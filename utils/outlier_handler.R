@@ -1,45 +1,42 @@
-################### Load libraries #############################################
-
-library(data.table)
-library(arrow)
-library(tidyverse)
-library(collapse)
+# Load required libraries
+library(knitr)
 library(here)
+library(tidyverse)
+library(arrow)
+library(gtsummary)
+library(data.table)
+library(collapse)
 
-##################### User input ###############################################
+# Load the configuration utility
+source("utils/config.R")
+
+# Access configuration parameters
+site_name <- config$site_name
+tables_path <- config$tables_path
+file_type <- config$file_type
+
+# Print the configuration parameters
+print(paste("Site Name:", site_name))
+print(paste("Tables Path:", tables_path))
+print(paste("File Type:", file_type))
+
 # Set parameters
-filetype <- "parquet"
-
-# change to CLIF-1.0 root directory 
-root_location <- here()
-
-# maximum age allowed, beyond this are replaced with NAs
 max_age_at_adm <- 119
 
-# below filepaths should work if you are operating within the GitHub repo. 
-labs_filepath <- paste0(root_location, "/rclif/clif_labs.", 
-                        filetype)
-labs_output_filepath <- paste0(root_location, "/rclif/clif_labs_clean.", 
-                               filetype)
-labs_outlier_thresholds_filepath <- paste0(root_location, 
-                                           "/rclif_qc/nejm_outlier_thresholds_labs.csv")
+# Define file paths
+labs_filepath <- file.path(tables_path, paste0("clif_labs.", file_type))
+labs_output_filepath <- file.path(here("output", "intermediate"), paste0("clif_labs_clean.", file_type))
+labs_outlier_thresholds_filepath <- here("outlier-thresholds", "outlier_thresholds_labs.csv")
 
-vitals_filepath <- paste0(root_location, "/rclif/clif_vitals.", 
-                          filetype)
-vitals_output_filepath <- paste0(root_location, "/rclif/clif_vitals_clean.", 
-                                 filetype)
-vitals_outlier_thresholds_filepath <- paste0(root_location, 
-                                             "/rclif_qc/nejm_outlier_thresholds_vitals.csv")
+vitals_filepath <- file.path(tables_path, paste0("clif_vitals.", file_type))
+vitals_output_filepath <- file.path(here("output", "intermediate"), paste0("clif_vitals_clean.", file_type))
+vitals_outlier_thresholds_filepath <- here("outlier-thresholds", "nejm_outlier_thresholds_vitals.csv")
 
-encounter_filepath <- paste0(root_location, 
-                             "/rclif/clif_encounter_demographics_dispo.", 
-                             filetype)
-encounter_output_filepath <- paste0(root_location, "/rclif/clif_encounter_demographics_dispo_clean.", 
-                                 filetype)
-
+encounter_filepath <- file.path(tables_path, paste0("clif_encounter_demographics_dispo.", file_type))
+encounter_output_filepath <- file.path(here("output", "intermediate"), paste0("clif_encounter_demographics_dispo_clean.", file_type))
 
 # Specify directory for result files
-results_path <- paste0(root_location, "/rclif_qc")
+results_path <- here("output")
 
 ##################### Functions  ###############################################
 # Define function to read data
@@ -47,10 +44,8 @@ read_data <- function(filepath, filetype) {
   if (filetype == 'csv') {
     return(fread(filepath))
   } else if (filetype == 'parquet') {
-    # Read parquet file using appropriate library
     return(read_parquet(filepath))
   } else if (filetype == 'fst') {
-    # Read fst file using appropriate library
     return(read_fst(filepath))
   } else {
     stop("Unsupported file type. Please provide either 'csv', 'parquet', or 'fst'.")
@@ -62,10 +57,8 @@ write_data <- function(data, filepath, filetype) {
   if (filetype == 'csv') {
     fwrite(data, filepath)
   } else if (filetype == 'parquet') {
-    # Write parquet file using appropriate library
     write_parquet(data, filepath, compression = "SNAPPY")
   } else if (filetype == 'fst') {
-    # Write fst file using appropriate library
     write_fst(data, filepath)
   } else {
     stop("Unsupported file type. Please provide either 'csv', 'parquet', or 'fst'.")
@@ -75,7 +68,6 @@ write_data <- function(data, filepath, filetype) {
 # Define function to replace outliers with NA values (long format)
 replace_outliers_with_na_long <- function(df, df_outlier_thresholds,
                                                category_variable, numeric_variable) {
-  # Join the data frames on the category variable
   df <- df %>%
     left_join(df_outlier_thresholds, by = category_variable) %>%
     mutate(!!sym(numeric_variable) := ifelse(
@@ -108,7 +100,7 @@ generate_summary_stats <- function(data, category_variable, numeric_variable) {
 
 #####################     Labs   ###############################################
 # Read labs data
-clif_labs <- read_data(labs_filepath, filetype)
+clif_labs <- read_data(labs_filepath, file_type)
 labs_outlier_thresholds <- read_data(labs_outlier_thresholds_filepath, 'csv')
 dir_path <- file.path(results_path, 'labs')
 dir.create(dir_path, recursive = TRUE, showWarnings = FALSE)
@@ -131,22 +123,18 @@ clif_labs_clean <- replace_outliers_with_na_long(clif_labs,
                                                  'lab_value_numeric')
 
 # Write clean labs file
-write_data(clif_labs_clean, labs_output_filepath, filetype)
+write_data(clif_labs_clean, labs_output_filepath, file_type)
 
 lab_summary_stats <- generate_summary_stats(clif_labs_clean,
                                             lab_category, 
                                             lab_value_numeric)
-write_data(lab_summary_stats, paste0(results_path, 
-                                     "/labs/clif_vitals_labs_stats_R.csv"), 
-           'csv')
+write_data(lab_summary_stats, file.path(results_path, "labs", paste0("clif_labs_summarystats_", site_name, ".csv")), 'csv')
 
 #####################   Vitals   ###############################################
 
-
-# Read labs data
-clif_vitals <- read_data(vitals_filepath, filetype)
-vitals_outlier_thresholds <- read_data(vitals_outlier_thresholds_filepath, 
-                                       'csv')
+# Read vitals data
+clif_vitals <- read_data(vitals_filepath, file_type)
+vitals_outlier_thresholds <- read_data(vitals_outlier_thresholds_filepath, 'csv')
 dir_path <- file.path(results_path, 'vitals')
 dir.create(dir_path, recursive = TRUE, showWarnings = FALSE)
 
@@ -156,22 +144,20 @@ clif_vitals_clean <- replace_outliers_with_na_long(clif_vitals,
                                                    'vital_category', 
                                                    'vital_value')
 
-# Write clean labs file
-write_data(clif_vitals_clean, vitals_output_filepath, filetype)
+# Write clean vitals file
+write_data(clif_vitals_clean, vitals_output_filepath, file_type)
 
 vital_summary_stats <- generate_summary_stats(clif_vitals_clean, 
                                               vital_category, 
                                               vital_value)
-write_data(vital_summary_stats, paste0(results_path, 
-                                       "/vitals/clif_vitals_summary_stats_R.csv"), 
-           'csv')
+write_data(vital_summary_stats, file.path(results_path, "vitals", paste0("clif_vitals_summary_stats_", site_name, ".csv")), 'csv')
 
 ################Encounter Demographics Dispo  ##################################
 
-clif_encounter<- read_data(encounter_filepath, filetype)
+clif_encounter <- read_data(encounter_filepath, file_type)
 
 clif_encounter$age_at_admission <- ifelse(clif_encounter$age_at_admission > max_age_at_adm, 
-                                          NA, 
+                                          NA,
                                           clif_encounter$age_at_admission)
 
-write_data(clif_encounter, encounter_output_filepath, filetype)
+write_data(clif_encounter, encounter_output_filepath, file_type)
