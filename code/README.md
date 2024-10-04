@@ -26,7 +26,7 @@ This directory contains scripts for the project workflow. The general workflow c
    - Handle outliers using predefined thresholds as given in `outlier-thresholds` directory. 
    - Clean and preprocess the data for analysis
 
-   Script: [`code/templates/R/02_quality_checks_template.R`](templates/R/02_quality_checks_template.R) & [`code/templates/R/03_outlier_handling_template.R`](templates/R/03_outlier_handling_template.R) 
+   Script: [`code/templates/R/02_project_quality_checks_template.R`](templates/R/02_project_quality_checks_template.R) & [`code/templates/R/03_outlier_handling_template.R`](templates/R/03_outlier_handling_template.R) 
 
    Input: cohort_data 
 
@@ -36,11 +36,11 @@ This directory contains scripts for the project workflow. The general workflow c
    This script (or set of scripts) should contain the main analysis code for the project.
    It may be broken down into multiple scripts if necessary.
    
-   Script: [`code/templates/R/04_analysis_template.R`](templates/R/04_analysis_template.R) 
+   Script: [`code/templates/R/04_project_analysis_template.R`](templates/R/04_project_analysis_template.R) 
 
    Input: cleaned_cohort_data 
 
-   Output: [List of expected result files, e.g., statistical_results, figures, tables saved in the `output/final` directory] 
+   Output: [List of expected result files, e.g., statistical_results, figures, tables saved in the [`output/final`](../output/README.md) directory] 
 
 
 
