@@ -11,33 +11,21 @@ Please refer to the online [CLIF data dictionary](https://clif-consortium.github
 ## Cohort identification
 Describe study cohort inclusion and exclusion criteria here
 
-## Project Environment
-Describe the steps to setup the project environment and other configurations
+## Expected Results
 
-## Repository Structure
+Describe the output of the analysis.
 
-```
-project-template/
-├── .gitignore
-├── README.md
-├── LICENSE
-├── requirements.txt or .renv
-├── config/
-├── outputs/
-├── outlier-thresholds/
-├── code/
-├── utils/
-```
+## Detailed Instructions for running the project
 
-### Description of Repository Components
+## 1. Setup Project Environment
+Describe the steps to setup the project environment
 
-- **`.gitignore`**: Specifies intentionally untracked files to ignore.
-- **`README.md`**: Provides an overview of the project, setup instructions, and usage guidelines.
-- **`LICENSE`**: Contains the licensing information for the project.
-- **`.renv`** or **`requirements.txt`**: Lists all dependencies and packages required to run the project.
-- **`outputs/` Directory**: Contains analysis results such as figures and tables.
-- **`code/` Directory**: Contains code as R/Python scripts or .Rmd/.qmd/jupyter notebooks.  The code is broadly related to data quality checks, cohort identification processes and data analysis tasks
-- **`utils/` Directory**: Utility functions and modules used throughout the project. Some common utility functions for CLIF projects are provided.
+## 2. Update `config/config.json`
+Follow instructions in the [config/README.md](config/README.md) file for detailed configuration steps.
+
+## 3. Run code
+Detailed instructions on the code workflow are provided in the [code directory](code/README.md)
+
 
 ## Example Repositories
 * [CLIF Adult Sepsis Events](https://github.com/08wparker/CLIF_adult_sepsis_events) for R
