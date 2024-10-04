@@ -28,7 +28,7 @@ Describe study cohort inclusion and exclusion criteria here
 
 ## Expected Results
 
-Describe the output of the analysis.
+Describe the output of the analysis. The final project results should be saved in the [`output/final`](output/README.md) directory.
 
 ## Detailed Instructions for running the project
 
