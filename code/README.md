@@ -16,6 +16,10 @@ Please note that this workflow is just a suggestion, and you may change the stru
    - cohort_data: the filtered study cohort data
    - cohort_summary: a summary table describing the study cohort
 
+   Examples of cohort identification scripts:
+   - `code/templates/Python/01_cohort_identification_template.py`
+   - `code/templates/R/01_cohort_identification_template.R`
+
 2. Run the quality_control script
    This script should:
    - Perform project-specific quality control checks on the filtered cohort data
