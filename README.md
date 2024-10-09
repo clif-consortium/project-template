@@ -37,13 +37,15 @@ Describe the steps to setup the project environment.
 
 Example for R:
 ```
-# Setup R environment using renv
 # Install renv if not already installed:
-if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+if (!requireNamespace("renv", quietly = TRUE)) {
+  install.packages("renv")
+} 
+
 # Initialize renv for the project:
-renv::init()
-# Install required packages:
-renv::install(c("knitr", "here", "tidyverse", "arrow", "gtsummary"))
+renv::init(bare = TRUE, settings = list(use.cache = FALSE))
+renv::install(c("tidyverse", "ggthemes",  "duckdb" ,"collapse", "tidyfast",  "fuzzyjoin", "arrow", "hrbrthemes", "here", "table1"))
+
 # Save the project's package state:
 renv::snapshot()
 ```
