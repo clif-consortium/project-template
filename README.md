@@ -42,7 +42,7 @@ Example for R:
 run `00_renv_restore.R` in the `code` folder
  
 Example for Python:
-Open your terminal 
+Open your terminal and run the following commands:
 ```
 python3 -m venv .mobilization
 source .mobilization/bin/activate
