@@ -13,6 +13,14 @@ Pass with notes is only for the Overall verdict at the bottom.
 | **Tester** | *name* |
 | **Date** | *YYYY-MM-DD* |
 
+## Environment
+
+| | |
+|---|---|
+| **OS** | *eg macOS 26.5.1* |
+| **RAM** | *64 GB* |
+| **Python** | *3.12.11* |
+
 > **How to fill this in:**  See [`buddy-testing-guide.md`](buddy-testing-guide.md) for what each
 > check means.
 
